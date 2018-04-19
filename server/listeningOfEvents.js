@@ -1,10 +1,11 @@
 const numb = require('./test');
-const {UPDATE_DATA} = require('../constants/constants');
+const {sendData, dataAcquisition} = require('./dataTransfer');
 
 function listenOfEvents(socket) {
-  socket.emit(UPDATE_DATA, numb());
-  socket.on('other', function () {
-    socket.emit(UPDATE_DATA, numb());
+  sendData(socket, numb());
+
+  socket.on('other', () => {
+    dataAcquisition(socket);
   });
 }
 
