@@ -1,9 +1,10 @@
-const numb = require('./test');
 const {sendData, dataAcquisition} = require('./dataTransfer');
 const selectionOfFlights = require('../server/selectionOfFlights');
 
+let data = selectionOfFlights();
+
 function listenOfEvents(socket) {
-  sendData(socket, selectionOfFlights());
+  sendData(socket, data);
 
   socket.on('other', () => {
     dataAcquisition(socket);

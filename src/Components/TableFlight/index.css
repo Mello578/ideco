@@ -1,0 +1,16 @@
+.table-flight {
+	margin-top: 40px;
+	border-top: 1px solid #AAA;
+	width: 100%;
+}
+
+.table-flight--header th {
+	padding: 5px 5px 15px 5px;
+}
+
+.table-flight--body tr{
+}
+
+.table-flight--body td{
+text-align: center;
+}

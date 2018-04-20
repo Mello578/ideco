@@ -11,10 +11,9 @@ export function addAllData(data) {
   store.dispatch({type: allData.type, payload: allData.data});
 }
 
-//
-// export function testClick() {
-//     socket.emit('other');
-// }
+export function updateData() {
+    socket.emit('other');
+}
 
 socket.on(UPDATE_DATA, function (data) { //прослушка + запуск функции при изменении данных
   addAllData(data);
