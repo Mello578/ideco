@@ -1,0 +1,10 @@
+.container {
+	margin: 30px 50px;
+	background: rgb(243, 243, 243);
+	padding: 20px;
+	min-width: 650px;
+}
+
+h1 {
+	color: #3b505f;
+}

@@ -1,0 +1,47 @@
+.panel-control {
+	margin-top: 10px;
+	display: flex;
+	min-width: 635px;
+}
+
+.city-input {
+	height: 22px;
+	width: 230px;
+	border-radius: 3px;
+	background: #ece9e9;
+
+}
+
+.button {
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.panel-control--button-revers {
+	margin: 0 20px;
+	height: 26px;
+	width: 26px;
+	background: url('/ideco/images/revert.png') center no-repeat;
+	background-size: 68%;
+}
+
+.panel-control--button-revers:active,
+.panel-control--button-filter:active {
+	position: relative;
+	right: 1px;
+	top: 1px;
+}
+
+.panel-control--button-filter {
+	margin-left: 20px;
+	height: 26px;
+	width: 100px;
+	background: rgba(70, 68, 68, 0.75);
+	color: #fff;
+}
+
+.city-input,
+.button {
+	border: 1px solid #cccaca;
+	outline: none;
+}
