@@ -251,7 +251,7 @@ const defaultCity = {
   city: 'Екатеринбург',
 };
 
-module.export = {
+module.exports = {
   DC: defaultCity,
   allCities: allCities
 };

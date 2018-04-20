@@ -2,4 +2,4 @@ const CONSTANTS = {
   averageSpeed: 764,
 };
 
-module.export = CONSTANTS;
+module.exports = CONSTANTS;

@@ -46,4 +46,4 @@ const allAircraft = [
   }
 ];
 
-module.export = allAircraft;
+module.exports = allAircraft;

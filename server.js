@@ -6,6 +6,7 @@ const listenOfEvents = require('./server/listeningOfEvents');
 
 const io = require('socket.io')(server);
 
+
 io.on('connection', (socket) => {
   listenOfEvents(socket)
 });

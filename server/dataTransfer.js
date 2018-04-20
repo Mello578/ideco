@@ -1,5 +1,7 @@
 const {UPDATE_DATA} = require('../constants/constants');
 const numb = require('./test');
+const selectionOfFlights = require('../server/selectionOfFlights');
+
 
 
 function sendData(socket, data){
@@ -7,7 +9,7 @@ function sendData(socket, data){
 }
 
 function dataAcquisition(socket){
-  sendData(socket, numb());
+  sendData(socket, selectionOfFlights());
 }
 
 module.exports = {

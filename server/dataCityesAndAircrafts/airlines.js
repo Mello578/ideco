@@ -25,4 +25,4 @@ const allAirlines = [
   }
 ];
 
-module.export = allAirlines;
+module.exports = allAirlines;

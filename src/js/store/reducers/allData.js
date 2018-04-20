@@ -1,8 +1,9 @@
 import {initialState} from './initialState';
+import {UPDATE_DATA} from '../../../../constants/constants';
 
 export function allDataReducer(state = initialState.allData, action) {
   switch (action.type) {
-    case 'all':
+    case UPDATE_DATA:
       return {
         data: action.payload,
       };
