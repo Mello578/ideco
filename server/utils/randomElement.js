@@ -1,5 +1,6 @@
 function randomElement(data){
-  return data[Math.round(Math.random()*((data.length - 1) - 0) + 0)];
+  const newData = data[Math.round(Math.random()*((data.length - 1) - 0) + 0)];
+  return Object.assign({}, newData);
 }
 
 module.exports = randomElement;

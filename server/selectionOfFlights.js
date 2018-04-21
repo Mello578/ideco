@@ -4,18 +4,23 @@ const {DC, allCities} = require('./dataCityesAndAircrafts/cityes'),
 
 const randomElement = require('./utils/randomElement');
 
-const OneFlights = require('./classes/OneFlights');
+const OneFlight = require('./classes/OneFlight');
 
+const flights = require('./dataCityesAndAircrafts/flight');
 
 function selectionOfFlights() {
+  const allFlights = flights();
   const arrayAllFlight = [];
   for (let currentCity of allCities) {
+    const id = currentCity.id;
     const variableOfSelect = Math.round(Math.random() * 1000) % 2;
     const departureCity = !variableOfSelect ? DC : currentCity;
     const arrivalCity = variableOfSelect ? DC : currentCity;
     const plane = selectOfPlain(currentCity);
     const airlines = randomElement(allAirlines);
-    arrayAllFlight.push(new OneFlights(departureCity, arrivalCity, plane, airlines))
+    airlines.flight += allFlights[id];
+    arrayAllFlight.push(new OneFlight(id, departureCity, arrivalCity, plane, airlines));
+    arrayAllFlight[id].timeDepartureOrArrival();
   }
   return arrayAllFlight;
 }

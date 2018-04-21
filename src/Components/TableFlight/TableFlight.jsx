@@ -5,10 +5,10 @@ import style from './index.css';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
 
-
 class Table extends Component {
 
   tableContent(allData) {
+    const {dateArrival, expectedTime} = allData.allDataTime;
     const arrayContent = [
       <img src={allData.airlines.logo}
            alt={allData.airlines.name}
@@ -18,6 +18,8 @@ class Table extends Component {
       allData.departureCity.city,
       allData.arrivalCity.city,
       allData.aircraft.typeJet,
+      dateArrival,
+      expectedTime
     ];
 
     return arrayContent;
