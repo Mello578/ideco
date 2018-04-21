@@ -2,24 +2,39 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {allDataReducer} from '../../js/store/reducers/allData';
 import style from './index.css';
+import {MONTHS} from '../../../constants/months';
+import {formatTime} from '../../js/utils/formatTime';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
 
 class Table extends Component {
 
   tableContent(allData) {
-    const {dateArrival, expectedTime} = allData.allDataTime;
+    let {timeDepart, timeArrival, expectedTime} = allData.allDataTime;
+    timeDepart = new Date(timeDepart);
+    timeArrival = new Date(timeArrival);
+    expectedTime = new Date(expectedTime);
+
+
     const arrayContent = [
       <img src={allData.airlines.logo}
            alt={allData.airlines.name}
            title={allData.airlines.name}
            className={'table-flight--logo-airlines'}/>,
       allData.airlines.flight,
-      allData.departureCity.city,
-      allData.arrivalCity.city,
       allData.aircraft.typeJet,
-      dateArrival,
-      expectedTime
+      allData.departureCity.city,
+      `${timeDepart.getDate()} 
+      ${MONTHS[timeDepart.getMonth()]} 
+      ${formatTime(timeDepart.getHours())}:${formatTime(timeDepart.getMinutes())}
+      `,
+      allData.arrivalCity.city,
+      `${timeArrival.getDate()} 
+      ${MONTHS[timeArrival.getMonth()]} 
+      ${formatTime(timeArrival.getHours())}:${formatTime(timeArrival.getMinutes())}
+      `,
+      `
+      ${formatTime(expectedTime.getHours())}:${formatTime(expectedTime.getMinutes())}`
     ];
 
     return arrayContent;

@@ -1,6 +1,5 @@
 const {averageSpeed} = require('../constants/constants');
 const randomNumber = require('../utils/randomNumder');
-const months = require('../constants/months');
 
 class OneFlight {
   constructor(id, departureCity, arrivalCity, aircraft, airlines) {
@@ -31,20 +30,12 @@ class OneFlight {
     expectedTime.setMinutes(expectedTime.getMinutes() + randomNumber(20, -20));
 
     this.allDataTime = {
+      timeDepart: dateDep,
       timeArrival: dateArrival,
-      dateArrival: `
-      ${dateArrival.getDate()} 
-      ${months[dateArrival.getMonth()]} 
-      ${this.formatTime(dateArrival.getHours())}:${dateArrival.getMinutes()}
-      `,
-      expectedTime: `
-      ${this.formatTime(expectedTime.getHours())}:${this.formatTime(expectedTime.getMinutes())}`
+      expectedTime: expectedTime
     };
   }
 
-  formatTime(time) {
-    return time < 10 ? '0' + time : time;
-  }
 }
 
 module.exports = OneFlight;
