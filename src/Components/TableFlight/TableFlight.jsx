@@ -10,7 +10,10 @@ class Table extends Component {
 
   tableContent(allData) {
     const arrayContent = [
-      allData.airlines.name,
+      <img src={allData.airlines.logo}
+           alt={allData.airlines.name}
+           title={allData.airlines.name}
+           className={'table-flight--logo-airlines'}/>,
       allData.airlines.flight,
       allData.departureCity.city,
       allData.arrivalCity.city,
@@ -38,7 +41,7 @@ class Table extends Component {
         {
           this.props.allData ? this.props.allData.map((item, key) => {
             return (
-              <tr key={key}>
+              <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}}>
                 {
                   this.tableContent(item).map((content, key) => {
                     return (

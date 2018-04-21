@@ -4,7 +4,7 @@ const selectionOfFlights = require('../server/selectionOfFlights');
 let data = selectionOfFlights();
 
 function listenOfEvents(socket) {
-  sendData(socket, data);
+ // sendData(socket, data);
 
   socket.on('other', () => {
     dataAcquisition(socket);

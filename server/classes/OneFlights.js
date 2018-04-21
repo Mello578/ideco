@@ -7,6 +7,12 @@ class OneFlights {
     this.aircraft = aircraft;
     this.airlines = airlines;
   }
+
+  get timeDepartureOrArrival(){
+
+
+
+  }
 }
 
 module.exports = OneFlights;
