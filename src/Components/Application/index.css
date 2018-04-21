@@ -5,6 +5,17 @@
 	min-width: 650px;
 }
 
+.container--header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#current-time{
+	font-size: 28px;
+	font-weight: bold;
+}
+
 h1 {
 	color: #3b505f;
 }
