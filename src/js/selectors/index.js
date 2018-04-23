@@ -27,7 +27,7 @@ export const flightStatusSelectorFactory = (flightId) => {
       const timeBeforeBoarding = timeDepartTimestamp - 50 * MIN;
       const timeNowBoarding = timeDepartTimestamp - 30 * MIN;
       const timeFlew = timeDepartTimestamp - 5 * MIN;
-      const timeflies = timeArrivalTimestamp - 5 * MIN;
+      const timeFlies = timeArrivalTimestamp - 5 * MIN;
 
       if(status === undefined){
         switch (true){
@@ -40,7 +40,7 @@ export const flightStatusSelectorFactory = (flightId) => {
           case currentTimeTimestamp < timeFlew:
             return STATUS_FLIGHT.flew;
             break;
-          case currentTimeTimestamp > timeFlew && currentTimeTimestamp < timeflies:
+          case currentTimeTimestamp > timeFlew && currentTimeTimestamp < timeFlies:
             return STATUS_FLIGHT.flies;
             break;
           case currentTimeTimestamp > expectedTimeTimestamp:
