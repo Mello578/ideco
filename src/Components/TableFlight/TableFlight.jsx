@@ -42,7 +42,7 @@ class Table extends Component {
                 <CityArrival data={item}/>
                 <TimeArrival data={item}/>
                 <TimeExpected data={item}/>
-                <Status idStatus={key}/>
+                <Status flightId={item.id}/>
               </tr>
             )
           }) : ''

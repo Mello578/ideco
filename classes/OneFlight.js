@@ -8,10 +8,6 @@ class OneFlight {
     this.arrivalCity = arrivalCity;
     this.aircraft = aircraft;
     this.airlines = airlines;
-    this.status = {
-      status: '',
-      lockedStatus: false        //заблокировать статус
-    };
   }
 
   timeDepartureOrArrival() {

@@ -1,6 +1,7 @@
 export const STATUS_FLIGHT = {
+  beforeBoarding: 'посадка не началась',
   nowBoarding: 'идет посадка на рейс',
-  flew: 'вылетел',
+  flew: 'взлетает',
   flies: 'летит',
   landed: 'приземлился',
   cancelled:'отменен',
