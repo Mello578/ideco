@@ -7,7 +7,6 @@ import io from 'socket.io-client';
 let socket = io(`http://localhost:${PORT}`);
 
 export function addAllData(data) {
-  localStorage.setItem('allData', JSON.stringify(data));
   const allData = allDataAction(data);
   store.dispatch({type: allData.type, payload: allData.data});
 }

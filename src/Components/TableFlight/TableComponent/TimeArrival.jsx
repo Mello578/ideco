@@ -8,7 +8,7 @@ import {getTime} from '../../../js/utils/getTime';
 class TimeArriv extends Component {
 
   render() {
-    const dateParam = this.props.allData[this.props.idTimeArriv].allDataTime;
+    const dateParam = this.props.data.allDataTime;
     const timeArrival = getTime(dateParam.timeArrival);
     return (
       <td>

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 class Logo extends Component {
 
   render() {
-    const {airlines} = this.props.allData[this.props.idLogo];
+    const {airlines} = this.props.data;
     return(
     <td>
       <img src={airlines.logo}

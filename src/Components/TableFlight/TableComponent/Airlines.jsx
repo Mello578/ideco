@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class AirlinesName extends Component {
 
   render() {
-    const {airlines} = this.props.allData[this.props.idAirlines];
+    const {airlines} = this.props.data;
     return (
       <td>
         {airlines.flight}

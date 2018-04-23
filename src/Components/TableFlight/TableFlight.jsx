@@ -34,15 +34,15 @@ class Table extends Component {
           this.props.allData ? this.props.allData.map((item, key) => {
             return (
               <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}}>
-                <LogoAirlines idLogo={key}/>
-                <Airlines idAirlines={key}/>
-                <TypeJet idJet={key}/>
-                <CityDeparture idCityDepart={key}/>
-                <TimeDeparture idTimeDepart={key}/>
-                <CityArrival idCityArriv={key}/>
-                <TimeArrival idTimeArriv={key}/>
-                <TimeExpected idTimeExp={key}/>
-                <Status/>
+                <LogoAirlines data={item}/>
+                <Airlines data={item}/>
+                <TypeJet data={item}/>
+                <CityDeparture data={item}/>
+                <TimeDeparture data={item}/>
+                <CityArrival data={item}/>
+                <TimeArrival data={item}/>
+                <TimeExpected data={item}/>
+                <Status idStatus={key}/>
               </tr>
             )
           }) : ''

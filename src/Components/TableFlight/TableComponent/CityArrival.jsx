@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class CityArriv extends Component {
 
   render() {
-    const {arrivalCity} = this.props.allData[this.props.idCityArriv];
+    const {arrivalCity} = this.props.data;
     return (
       <td>
         {arrivalCity.city}

@@ -8,7 +8,7 @@ import {getTime} from '../../../js/utils/getTime';
 class TimeDepart extends Component {
 
   render() {
-    const dateParam = this.props.allData[this.props.idTimeDepart].allDataTime;
+    const dateParam = this.props.data.allDataTime;
     const timeDepart = getTime(dateParam.timeDepart);
     return (
       <td>

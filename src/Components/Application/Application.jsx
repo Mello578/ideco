@@ -2,35 +2,19 @@ import React, {Component} from 'react';
 import style from './index.css';
 import {PanelControl} from '../PanelControl/PanelControl';
 import {TableFlight} from '../TableFlight/TableFlight';
-import {getElem} from '../../js/utils/getElem';
-import {formatTime} from '../../js/utils/formatTime';
+import {connect} from 'react-redux';
+import {CurrentTime} from '../CurrentTime/CurrentTime';
 
-export class Application extends Component {
-
-  setTime(element){
-    let separator = ':';
-    let date = new Date;
-    element.innerHTML = formatTime(date.getHours()) + separator + formatTime(date.getMinutes());
-  }
-
-  setCurrentTime(){
-    const timeElement = getElem('current-time');
-    this.setTime(timeElement);
-    setInterval(()=>{
-      this.setTime(timeElement);
-    }, 60000)
-  }
-
-  componentDidMount(){
-    this.setCurrentTime();
-  }
+class App extends Component {
 
   render() {
     return (
       <div className={'container'}>
         <div className={'container--header'}>
           <h1>Онлайн табло</h1>
-          <span>Текущее время: <span id={'current-time'}></span></span>
+          <span>Текущее время:
+            <CurrentTime/>
+          </span>
         </div>
         <PanelControl/>
         <TableFlight/>
@@ -38,3 +22,15 @@ export class Application extends Component {
     )
   }
 }
+
+export const Application = connect(({allDataReducer, timeReducer}) =>
+    ({
+      allData: allDataReducer.data,
+      currentTime: timeReducer.data
+    }),
+  dispatch => ({
+  setCurrentTime(time){
+    dispatch({type: time.type, payload: time.data})
+    }
+  })
+)(App);

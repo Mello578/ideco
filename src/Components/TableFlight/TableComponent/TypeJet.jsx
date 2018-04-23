@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class Jet extends Component {
 
   render() {
-    const {aircraft} = this.props.allData[this.props.idJet];
+    const {aircraft} = this.props.data;
     return (
       <td>
         {aircraft.typeJet}

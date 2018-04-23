@@ -6,7 +6,7 @@ import {getTime} from '../../../js/utils/getTime';
 class TimeExp extends Component {
 
   render() {
-    const dateParam = this.props.allData[this.props.idTimeExp].allDataTime;
+    const dateParam = this.props.data.allDataTime;
     const expectedTime = getTime(dateParam.expectedTime);
     return (
       <td>
