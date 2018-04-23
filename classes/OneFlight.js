@@ -1,5 +1,5 @@
-const {averageSpeed} = require('../constants/constants');
-const randomNumber = require('../utils/randomNumder');
+const {averageSpeed} = require('../server/constants/constants');
+const randomNumber = require('../server/utils/randomNumder');
 
 class OneFlight {
   constructor(id, departureCity, arrivalCity, aircraft, airlines) {
@@ -8,6 +8,10 @@ class OneFlight {
     this.arrivalCity = arrivalCity;
     this.aircraft = aircraft;
     this.airlines = airlines;
+    this.status = {
+      status: '',
+      lockedStatus: false        //заблокировать статус
+    };
   }
 
   timeDepartureOrArrival() {
@@ -35,7 +39,6 @@ class OneFlight {
       expectedTime: expectedTime
     };
   }
-
 }
 
 module.exports = OneFlight;

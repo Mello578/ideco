@@ -7,14 +7,17 @@ import {formatTime} from '../../js/utils/formatTime';
 
 export class Application extends Component {
 
-  setCurrentTime(){
-    const timeElement = getElem('current-time');
+  setTime(element){
     let separator = ':';
     let date = new Date;
-    timeElement.innerHTML = formatTime(date.getHours()) + separator + formatTime(date.getMinutes());
+    element.innerHTML = formatTime(date.getHours()) + separator + formatTime(date.getMinutes());
+  }
+
+  setCurrentTime(){
+    const timeElement = getElem('current-time');
+    this.setTime(timeElement);
     setInterval(()=>{
-      date = new Date;
-      timeElement.innerHTML = formatTime(date.getHours()) + separator + formatTime(date.getMinutes());
+      this.setTime(timeElement);
     }, 60000)
   }
 
@@ -28,7 +31,6 @@ export class Application extends Component {
         <div className={'container--header'}>
           <h1>Онлайн табло</h1>
           <span>Текущее время: <span id={'current-time'}></span></span>
-
         </div>
         <PanelControl/>
         <TableFlight/>

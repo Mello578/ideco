@@ -4,7 +4,7 @@ const {DC, allCities} = require('./dataCityesAndAircrafts/cityes'),
 
 const randomElement = require('./utils/randomElement');
 
-const OneFlight = require('./classes/OneFlight');
+const OneFlight = require('../classes/OneFlight');
 
 const flights = require('./dataCityesAndAircrafts/flight');
 

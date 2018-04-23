@@ -1,3 +1,4 @@
 export let initialState = {
-  allData: []
+  allData: [],
+  status: '',
 };

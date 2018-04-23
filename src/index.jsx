@@ -5,8 +5,7 @@ import {createStore} from 'redux';
 
 import reducer from './js/store/reducers/index';
 import {Application} from './Components/Application/Application';
-import {addAllData} from './js/utils/'
-import {updateData} from './js/utils';
+import {updateData, addAllData} from './js/utils/getAllData';
 
 export const store = createStore(
   reducer,
