@@ -17,10 +17,7 @@ const mapStateToPropsFactory = (state, {flightId}) => {
   const flightStatusSelector = flightStatusSelectorFactory(flightId);
 
   return (state) => {
-    const {allDataReducer} = state;
-
     return {
-      allData: allDataReducer.data,
       status: flightStatusSelector(state),
     };
   }

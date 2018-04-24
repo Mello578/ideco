@@ -4,29 +4,37 @@ import {PanelControl} from '../PanelControl/PanelControl';
 import {TableFlight} from '../TableFlight/TableFlight';
 import {connect} from 'react-redux';
 import {CurrentTime} from '../CurrentTime/CurrentTime';
+import {BarControl} from '../BarControl/BarControl';
 
 class App extends Component {
 
   render() {
     return (
-      <div className={'container'}>
-        <div className={'container--header'}>
-          <h1>Онлайн табло</h1>
-          <span>Текущее время:
+      <div>
+        {
+          this.props.visible ? <BarControl /> : ''
+        }
+        <div className={'container'}>
+          <div className={'container--header'}>
+            <h1>Онлайн табло</h1>
+            <span>Текущее время:
             <CurrentTime/>
           </span>
+          </div>
+          <PanelControl/>
+          <TableFlight/>
         </div>
-        <PanelControl/>
-        <TableFlight/>
       </div>
+
     )
   }
 }
 
-export const Application = connect(({allDataReducer, timeReducer}) =>
+export const Application = connect(({allDataReducer, timeReducer, barControlReducer}) =>
     ({
       allData: allDataReducer.data,
-      currentTime: timeReducer.data
+      currentTime: timeReducer.data,
+      visible: barControlReducer.data,
     }),
   dispatch => ({
   setCurrentTime(time){

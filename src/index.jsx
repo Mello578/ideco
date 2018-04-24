@@ -14,8 +14,8 @@ export const store = createStore(
 
 addAllData();
 updateData();
-
 render(
+
   <Provider store={store}>
     <Application/>
   </Provider>,

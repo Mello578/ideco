@@ -45,7 +45,7 @@ export const flightStatusSelectorFactory = (flightId) => {
             break;
         }
       }else{
-        return status;
+        return status; // возвращаем статус, т.к. дает больше гибкости. Пр-ры статусов которые не нужно автоматически менять: Отменен, Совмещен, Поломка. Либо делать доп поле для комментариев
       }
     }
   );

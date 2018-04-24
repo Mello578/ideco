@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import style from './index.css';
+import {getSelectedFlight} from '../BarControl/BarControl';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
 
@@ -13,8 +14,17 @@ import {CityArrival} from './TableComponent/CityArrival';
 import {TimeArrival} from './TableComponent/TimeArrival';
 import {TimeExpected} from './TableComponent/TimeExpected';
 import {Status} from './TableComponent/Status';
+import {barControlAction} from '../../js/store/actions/barControlAction';
 
 class Table extends Component {
+
+  visibleBarControl(flight){
+    const {visible} = this.props;
+    const newVisible = barControlAction(!visible);
+    this.props.setVisible(newVisible);
+    getSelectedFlight(flight);
+  }
+
   render() {
     return (
       <table className={'table-flight'}>
@@ -33,7 +43,7 @@ class Table extends Component {
         {
           this.props.allData ? this.props.allData.map((item, key) => {
             return (
-              <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}}>
+              <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}} onClick={()=>this.visibleBarControl(item)}>
                 <LogoAirlines data={item}/>
                 <Airlines data={item}/>
                 <TypeJet data={item}/>
@@ -53,8 +63,14 @@ class Table extends Component {
   }
 }
 
-export const TableFlight = connect(({allDataReducer}) =>
+export const TableFlight = connect(({allDataReducer, barControlReducer}) =>
   ({
-    allData: allDataReducer.data
+    allData: allDataReducer.data,
+    visible: barControlReducer.data,
+  }),
+  dispatch => ({
+    setVisible(mode){
+      dispatch({type: mode.type, payload: mode.data})
+    }
   })
 )(Table);

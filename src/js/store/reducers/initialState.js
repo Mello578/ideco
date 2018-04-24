@@ -1,4 +1,5 @@
 export let initialState = {
   allData: [],
-  currentTime: ''
+  currentTime: '',
+  visibleBarControl: false
 };
