@@ -13,7 +13,6 @@ export const flightStatusSelectorFactory = (flightId) => {
       const {
         allDataTime: {
           timeDepart,
-          timeArrival,
           expectedTime,
         },
         status
@@ -21,26 +20,24 @@ export const flightStatusSelectorFactory = (flightId) => {
 
       const currentTimeTimestamp = currentTime.getTime();
       const timeDepartTimestamp = new Date(timeDepart).getTime();
-      const timeArrivalTimestamp = new Date(timeArrival).getTime();
       const expectedTimeTimestamp = new Date(expectedTime).getTime();
 
       const timeBeforeBoarding = timeDepartTimestamp - 50 * MIN;
-      const timeNowBoarding = timeDepartTimestamp - 30 * MIN;
-      const timeFlew = timeDepartTimestamp - 5 * MIN;
-      const timeFlies = timeArrivalTimestamp - 5 * MIN;
+      const timeFlew = timeDepartTimestamp - 10 * MIN;
+      const timeEndFlew = timeDepartTimestamp + 5 * MIN;
 
       if(status === undefined){
         switch (true){
           case currentTimeTimestamp < timeBeforeBoarding:
             return STATUS_FLIGHT.beforeBoarding;
             break;
-          case currentTimeTimestamp < timeNowBoarding:
+          case currentTimeTimestamp < timeFlew:
             return STATUS_FLIGHT.nowBoarding;
             break;
-          case currentTimeTimestamp < timeFlew:
+          case currentTimeTimestamp > timeFlew && currentTimeTimestamp < timeEndFlew:
             return STATUS_FLIGHT.flew;
             break;
-          case currentTimeTimestamp > timeFlew && currentTimeTimestamp < timeFlies:
+          case currentTimeTimestamp > timeEndFlew && currentTimeTimestamp < expectedTimeTimestamp:
             return STATUS_FLIGHT.flies;
             break;
           case currentTimeTimestamp > expectedTimeTimestamp:
@@ -48,7 +45,7 @@ export const flightStatusSelectorFactory = (flightId) => {
             break;
         }
       }else{
-        return STATUS_FLIGHT.cancelled;
+        return status;
       }
     }
   );
