@@ -6,7 +6,7 @@ class TableStatus extends Component {
 
   render() {
     return <td>
-             <span>
+             <span id={`status-${this.props.flightId}`}>
                {this.props.status}
              </span>
           </td>

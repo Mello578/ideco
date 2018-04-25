@@ -5,29 +5,59 @@ import style from './index.css'
 import {barControlAction} from '../../js/store/actions/barControlAction';
 import {formatTime} from '../../js/utils/formatTime';
 import {STATUS_FLIGHT} from '../../../constants/statusFlight';
+import {getElem} from '../../js/utils/getElem';
+import {updateData} from '../../js/utils/requestsOfData';
+import {getTime} from '../../js/utils/getTime';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
-const allAircraft = require('../../../constants/dataCityesAndAircrafts/aircrafts');
-const allAirlines = require('../../../constants/dataCityesAndAircrafts/airlines');
 const dataCity = require('../../../constants/dataCityesAndAircrafts/cityes');
 
 let selectedFlight = null;
+let flightStatus = null;
 
 export function getSelectedFlight(getFlight) {
   selectedFlight = getFlight;
+  flightStatus = getElem(`status-${getFlight.id}`).innerHTML;
 }
 
 class Bar extends Component {
 
-  dateFormat(time){
+  dateFormat(time) {
     time = new Date(time);
     const year = time.getFullYear();
-    const month = formatTime(time.getMonth());
-    const day = formatTime(time.getDay());
+    const month = formatTime(time.getMonth() + 1); // т.к. нумерация с 0
+    const day = formatTime(time.getDate());
     const hour = formatTime(time.getHours());
     const minutes = formatTime(time.getMinutes());
-    console.log(`${year}-${month}-${day}T${hour}:${minutes}`)
     return `${year}-${month}-${day}T${hour}:${minutes}`;
+  }
+
+  update() {
+    let updateFlight = {...selectedFlight};
+    if (
+      updateFlight.airlines.name !== this.airlinesName.value
+      || updateFlight.airlines.flight !== this.airlinesFlight.value
+      || updateFlight.aircraft.typeJet !== this.typeJet.value
+      || updateFlight.departureCity.city !== this.departureCity.value
+      || updateFlight.arrivalCity.city !== this.arrivalCity.value
+      || this.dateFormat(updateFlight.allDataTime.timeDepart) !== this.timeDepart.value
+      || this.dateFormat(updateFlight.allDataTime.timeArrival) !== this.timeArrival.value
+      || this.dateFormat(updateFlight.allDataTime.expectedTime) !== this.expectedTime.value
+    ) {
+      const newTimeDepart = getTime(this.timeDepart.value);
+      const newTimeArrival = getTime(this.timeArrival.value);
+      const newExpectedTime = getTime(this.expectedTime.value);
+
+      updateFlight.airlines.name = this.airlinesName.value;
+      updateFlight.airlines.flight = this.airlinesFlight.value;
+      updateFlight.aircraft.typeJet = this.typeJet.value;
+      updateFlight.departureCity.city = this.departureCity.value;
+      updateFlight.arrivalCity.city = this.arrivalCity.value;
+      updateFlight.allDataTime.timeDepart = newTimeDepart;
+      updateFlight.allDataTime.timeArrival = newTimeArrival;
+      updateFlight.allDataTime.expectedTime = newExpectedTime;
+      updateData(updateFlight);
+    }
   }
 
   canceled() {
@@ -38,6 +68,7 @@ class Bar extends Component {
 
   componentWillUnmount() {
     selectedFlight = null;
+    flightStatus = null;
   }
 
   render() {
@@ -46,7 +77,6 @@ class Bar extends Component {
     const headerOne = arrayHeader.slice(0, 5);
     const headerTwo = arrayHeader.slice(5);
     const arrayStatus = Object.values(STATUS_FLIGHT);
-    const allCity = [...dataCity.allCities, dataCity.DC];
 
     return (
       <div className={'bar-control'}>
@@ -72,30 +102,37 @@ class Bar extends Component {
               <tr>
                 <td>
                   <div>
-                    <input className={'input-edited'} name='airlines' id='block-airline' defaultValue={airlines.name}></input>
+                    <input ref={(input) => this.airlinesName = input ? input : ''}
+                           className={'input-edited'} id='block-airline' defaultValue={airlines.name}></input>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <input className={'input-edited'} name='flight' id='block-flight' defaultValue={airlines.flight}></input>
+                    <input ref={(input) => this.airlinesFlight = input ? input : ''}
+                           className={'input-edited'} id='block-flight' defaultValue={airlines.flight}></input>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <input className={'input-edited'} name='aircraft' id='block-typeJet' defaultValue={aircraft.typeJet}></input>
+                    <input ref={(input) => this.typeJet = input ? input : ''} className={'input-edited'}
+                           id='block-typeJet' defaultValue={aircraft.typeJet}></input>
                   </div>
                 </td>
                 <td>
                   <div>
-                    <input className={'input-edited'} name='departureCity' id='block-departureCity' defaultValue={departureCity.city}></input>
+                    <input ref={(input) => this.departureCity = input ? input : ''}
+                           className={'input-edited'} id='block-departureCity'
+                           defaultValue={departureCity.city}></input>
                   </div>
                 </td>
                 <td>
-                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeDepart)}/>
+                  <input ref={(input) => this.timeDepart = input ? input : ''} type='datetime-local'
+                         defaultValue={this.dateFormat(allDataTime.timeDepart)}/>
                 </td>
               </tr>
               </tbody>
             </table>
+
             <table>
               <thead>
               <tr>
@@ -114,19 +151,24 @@ class Bar extends Component {
               <tr>
                 <td>
                   <div>
-                    <input className={'input-edited'} name='arrivalCity' id='block-arrivalCity' defaultValue={arrivalCity.city}></input>
+                    <input ref={(input) => this.arrivalCity = input ? input : ''}
+                           className={'input-edited'} name='arrivalCity' id='block-arrivalCity'
+                           defaultValue={arrivalCity.city}></input>
                   </div>
                 </td>
                 <td>
-                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeArrival)}/>
+                  <input ref={(input) => this.timeArrival = input ? input : ''} type='datetime-local'
+                         defaultValue={this.dateFormat(allDataTime.timeArrival)}/>
                 </td>
                 <td>
-                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.expectedTime)}/>
+                  <input ref={(input) => this.expectedTime = input ? input : ''} type='datetime-local'
+                         defaultValue={this.dateFormat(allDataTime.expectedTime)}/>
                 </td>
                 <td>
-                  <select className={'select'} name='status' id='block-status'>
+                  <select ref={(select) => this.status = select ? select : ''} defaultValue={flightStatus}
+                          className={'select'} name='status' id='block-status'>
                     {
-                      arrayStatus.map((item, key)=>{
+                      arrayStatus.map((item, key) => {
                         return (
                           <option key={key} value={item}>
                             {item}
@@ -142,7 +184,7 @@ class Bar extends Component {
           </div>
 
           <div className={'block-button'}>
-            <button>Сохранить</button>
+            <button onClick={() => this.update()}>Сохранить</button>
             <button onClick={() => this.canceled()}>Отменить</button>
           </div>
         </div>

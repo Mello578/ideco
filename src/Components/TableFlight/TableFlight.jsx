@@ -18,11 +18,11 @@ import {barControlAction} from '../../js/store/actions/barControlAction';
 
 class Table extends Component {
 
-  visibleBarControl(flight){
+  visibleBarControl(flight, status){
     const {visible} = this.props;
     const newVisible = barControlAction(!visible);
     this.props.setVisible(newVisible);
-    getSelectedFlight(flight);
+    getSelectedFlight(flight, status);
   }
 
   render() {
@@ -43,7 +43,7 @@ class Table extends Component {
         {
           this.props.allData ? this.props.allData.map((item, key) => {
             return (
-              <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}} onClick={()=>this.visibleBarControl(item)}>
+              <tr key={key} style={{background: key % 2 === 0 ? '' : '#e3e3e3'}} onClick={()=>this.visibleBarControl(item, Status)}>
                 <LogoAirlines data={item}/>
                 <Airlines data={item}/>
                 <TypeJet data={item}/>

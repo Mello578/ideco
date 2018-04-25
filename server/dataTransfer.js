@@ -1,13 +1,12 @@
-const {UPDATE_DATA} = require('../constants/constants');
-let selectionOfFlights = require('../server/selectionOfFlights');
-const compareDate = require('./utils/compareDate');
+const {GET_DATA} = require('../constants/constants');
 
 function sendData(socket, data){
-  socket.emit(UPDATE_DATA, data);
+  socket.emit(GET_DATA, data);
 }
 
-function dataAcquisition(socket){
-  sendData(socket, selectionOfFlights().sort(compareDate));
+function dataAcquisition(socket, data){
+  sendData(socket, data);
+  console.log('выззвался дата апдейт')
 }
 
 module.exports = {

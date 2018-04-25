@@ -1,13 +1,17 @@
 const {sendData, dataAcquisition} = require('./dataTransfer');
-// const selectionOfFlights = require('../server/selectionOfFlights');
-//
-// let data = selectionOfFlights();
+const {UPDATE_DATA} = require('../constants/constants');
+let selectionOfFlights = require('../server/selectionOfFlights');
+const compareDate = require('./utils/compareDate');
+const updateData = require('./utils/updateData');
+
+let allData = selectionOfFlights().sort(compareDate);
 
 function listenOfEvents(socket) {
- // sendData(socket, data);
+  sendData(socket, allData);
 
-  socket.on('other', () => {
-    dataAcquisition(socket);
+  socket.on(UPDATE_DATA, (data) => {
+    allData = updateData(allData, data).sort(compareDate);
+    dataAcquisition(socket, allData);
   });
 }
 
