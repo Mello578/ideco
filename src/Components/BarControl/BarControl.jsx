@@ -71,24 +71,24 @@ class Bar extends Component {
               <tbody>
               <tr>
                 <td>
-                  <select name='airlines' id='block-airline'>
-                    <option value={airlines.id}>{airlines.name}</option>
-                  </select>
+                  <div>
+                    <input className={'input-edited'} name='airlines' id='block-airline' defaultValue={airlines.name}></input>
+                  </div>
                 </td>
                 <td>
-                  <select name='flight' id='block-flight'>
-                    <option value={airlines.flight}>{airlines.flight}</option>
-                  </select>
+                  <div>
+                    <input className={'input-edited'} name='flight' id='block-flight' defaultValue={airlines.flight}></input>
+                  </div>
                 </td>
                 <td>
-                  <select name='aircraft' id='block-aircraft'>
-                    <option value={aircraft.id}>{aircraft.typeJet}</option>
-                  </select>
+                  <div>
+                    <input className={'input-edited'} name='aircraft' id='block-typeJet' defaultValue={aircraft.typeJet}></input>
+                  </div>
                 </td>
                 <td>
-                  <select name='departureCity' id='block-departureCity'>
-                    <option value={departureCity.id}>{departureCity.city}</option>
-                  </select>
+                  <div>
+                    <input className={'input-edited'} name='departureCity' id='block-departureCity' defaultValue={departureCity.city}></input>
+                  </div>
                 </td>
                 <td>
                   <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeDepart)}/>
@@ -113,9 +113,9 @@ class Bar extends Component {
               <tbody>
               <tr>
                 <td>
-                  <select name='arrivalCity' id='block-arrivalCity'>
-                    <option value={arrivalCity.id}>{arrivalCity.city}</option>
-                  </select>
+                  <div>
+                    <input className={'input-edited'} name='arrivalCity' id='block-arrivalCity' defaultValue={arrivalCity.city}></input>
+                  </div>
                 </td>
                 <td>
                   <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeArrival)}/>
@@ -124,7 +124,7 @@ class Bar extends Component {
                   <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.expectedTime)}/>
                 </td>
                 <td>
-                  <select name='status' id='block-status'>
+                  <select className={'select'} name='status' id='block-status'>
                     {
                       arrayStatus.map((item, key)=>{
                         return (

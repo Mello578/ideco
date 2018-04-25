@@ -37,9 +37,19 @@
 	margin-top: 15px;
 }
 
+.input-edited {
+	width: 150px;
+	font-size: 14px;
+	height: 19px;
+}
+
 input[type=datetime-local]{
 	font-size: 14px;
 	width: 208px;
+}
+
+.select {
+	height: 25px;
 }
 
 .block-button {
