@@ -1,12 +1,12 @@
-const {DC, allCities} = require('./dataCityesAndAircrafts/cityes'),
-  allAirlines = require('./dataCityesAndAircrafts/airlines'),
-  allAircrafts = require('./dataCityesAndAircrafts/aircrafts');
+const {DC, allCities} = require('../constants/dataCityesAndAircrafts/cityes'),
+  allAirlines = require('../constants/dataCityesAndAircrafts/airlines'),
+  allAircrafts = require('../constants/dataCityesAndAircrafts/aircrafts');
 
 const randomElement = require('./utils/randomElement');
 
 const OneFlight = require('../classes/OneFlight');
 
-const flights = require('./dataCityesAndAircrafts/flight');
+const flights = require('./utils/flight');
 
 function selectionOfFlights() {
   const allFlights = flights();

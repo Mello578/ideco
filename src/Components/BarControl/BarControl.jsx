@@ -3,8 +3,13 @@ import {connect} from 'react-redux';
 
 import style from './index.css'
 import {barControlAction} from '../../js/store/actions/barControlAction';
+import {formatTime} from '../../js/utils/formatTime';
+import {STATUS_FLIGHT} from '../../../constants/statusFlight';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
+const allAircraft = require('../../../constants/dataCityesAndAircrafts/aircrafts');
+const allAirlines = require('../../../constants/dataCityesAndAircrafts/airlines');
+const dataCity = require('../../../constants/dataCityesAndAircrafts/cityes');
 
 let selectedFlight = null;
 
@@ -13,6 +18,17 @@ export function getSelectedFlight(getFlight) {
 }
 
 class Bar extends Component {
+
+  dateFormat(time){
+    time = new Date(time);
+    const year = time.getFullYear();
+    const month = formatTime(time.getMonth());
+    const day = formatTime(time.getDay());
+    const hour = formatTime(time.getHours());
+    const minutes = formatTime(time.getMinutes());
+    console.log(`${year}-${month}-${day}T${hour}:${minutes}`)
+    return `${year}-${month}-${day}T${hour}:${minutes}`;
+  }
 
   canceled() {
     const {visible} = this.props;
@@ -25,20 +41,24 @@ class Bar extends Component {
   }
 
   render() {
-    console.log('idddd  ', selectedFlight);
-    const {aircraft, airlines, arrivalCity, departureCity} = selectedFlight ? selectedFlight : '';
-    const elementsFlight = TABLE_HEADER.split(',');
+    const {aircraft, airlines, arrivalCity, departureCity, allDataTime} = selectedFlight ? selectedFlight : '';
+    const arrayHeader = TABLE_HEADER.split(',');
+    const headerOne = arrayHeader.slice(0, 5);
+    const headerTwo = arrayHeader.slice(5);
+    const arrayStatus = Object.values(STATUS_FLIGHT);
+    const allCity = [...dataCity.allCities, dataCity.DC];
+
     return (
       <div className={'bar-control'}>
         <div className={'bar-control--dark-background'}></div>
         <div className={'modal-window'}>
           <span>Редактирование полетов</span>
-          <div className={'block-aircraft'}>
+          <div className={'block-edited'}>
             <table>
               <thead>
               <tr>
                 {
-                  elementsFlight.map((item, key) => {
+                  headerOne.map((item, key) => {
                     return (
                       <th key={key}>
                         {item}
@@ -70,17 +90,50 @@ class Bar extends Component {
                     <option value={departureCity.id}>{departureCity.city}</option>
                   </select>
                 </td>
-                <td></td>
+                <td>
+                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeDepart)}/>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <table>
+              <thead>
+              <tr>
+                {
+                  headerTwo.map((item, key) => {
+                    return (
+                      <th key={key}>
+                        {item}
+                      </th>
+                    )
+                  })
+                }
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
                 <td>
                   <select name='arrivalCity' id='block-arrivalCity'>
                     <option value={arrivalCity.id}>{arrivalCity.city}</option>
                   </select>
                 </td>
-                <td></td>
-                <td></td>
+                <td>
+                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.timeArrival)}/>
+                </td>
+                <td>
+                  <input type='datetime-local' defaultValue={this.dateFormat(allDataTime.expectedTime)}/>
+                </td>
                 <td>
                   <select name='status' id='block-status'>
-                    <option value={status}>{arrivalCity.city}</option>
+                    {
+                      arrayStatus.map((item, key)=>{
+                        return (
+                          <option key={key} value={item}>
+                            {item}
+                          </option>
+                        )
+                      })
+                    }
                   </select>
                 </td>
               </tr>

@@ -1,5 +1,5 @@
-const {allCities} = require('./cityes');
-const randomNumber = require('../utils/randomNumder');
+const {allCities} = require('../../constants/dataCityesAndAircrafts/cityes');
+const randomNumber = require('./randomNumder');
 
 function flights(){
   const allFlight = [];
