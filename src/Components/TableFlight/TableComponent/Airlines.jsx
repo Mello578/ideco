@@ -5,8 +5,6 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class AirlinesName extends Component {
 
   render() {
-    //const {airlines} = this.props.flight;
-    console.log('airlines')
     return (
       <td>
         {this.props.flight}

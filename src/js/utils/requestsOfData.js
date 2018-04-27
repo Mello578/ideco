@@ -1,4 +1,4 @@
-import {PORT, UPDATE_DATA, GET_DATA} from '../../../constants/constants';
+import {PORT, UPDATE_DATA, GET_DATA, FILTER_DATA} from '../../../constants/constants';
 import {allDataAction} from '../store/actions/allDataAction';
 import {store} from '../../index';
 
@@ -14,6 +14,12 @@ export function addAllData(data) {
 export function updateData(data) {
   if(data){
     socket.emit(UPDATE_DATA, data);
+  }
+}
+
+export function filerData(data) {
+  if(data){
+    socket.emit(FILTER_DATA, data);
   }
 }
 

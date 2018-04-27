@@ -9,12 +9,15 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class TimeArriv extends Component {
 
   render() {
-    const timeArrival = getTime(this.props.timeArrival);
+    const timeArrival = this.props.timeArrival ? getTime(this.props.timeArrival) : '';
+    const date = timeArrival
+      ? `${timeArrival.getDate()} ${MONTHS[timeArrival.getMonth()]}
+      ${formatTime(timeArrival.getHours())}:${formatTime(timeArrival.getMinutes())}`
+      : '';
     return (
       <td>
         {
-          `${timeArrival.getDate()} ${MONTHS[timeArrival.getMonth()]}
-      ${formatTime(timeArrival.getHours())}:${formatTime(timeArrival.getMinutes())}`
+          date
         }
       </td>
     )

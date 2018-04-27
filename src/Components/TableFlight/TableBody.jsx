@@ -23,13 +23,13 @@ class Body extends Component {
     getSelectedFlight(flight, status);
   }
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(nextProps) {
+    return nextProps.oneFlight !== this.props.oneFlight;
   }
 
   render() {
-    const {backgroundSort, oneFlight} = this.props;
     console.log('body')
+    const {backgroundSort, oneFlight} = this.props;
     return (
       <tr style={{background: backgroundSort % 2 === 0 ? '' : '#e3e3e3'}}
           onClick={() => this.visibleBarControl(oneFlight, Status)}>

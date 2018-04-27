@@ -6,7 +6,6 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class Jet extends Component {
 
   render() {
-    console.log('typejet')
     return (
       <td>
         {this.props.typeJet}

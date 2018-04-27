@@ -9,12 +9,15 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class TimeDepart extends Component {
 
   render() {
-    const timeDepart = getTime(this.props.timeDeparture);
+    const timeDepart = this.props.timeDeparture ? getTime(this.props.timeDeparture) : '';
+    const date = timeDepart
+      ? `${timeDepart.getDate()} ${MONTHS[timeDepart.getMonth()]}
+          ${formatTime(timeDepart.getHours())}:${formatTime(timeDepart.getMinutes())}`
+      : '';
     return (
       <td>
         {
-          `${timeDepart.getDate()} ${MONTHS[timeDepart.getMonth()]}
-          ${formatTime(timeDepart.getHours())}:${formatTime(timeDepart.getMinutes())}`
+          date
         }
       </td>
     )

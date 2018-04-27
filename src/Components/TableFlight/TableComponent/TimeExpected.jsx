@@ -7,11 +7,15 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class TimeExpect extends Component {
 
   render() {
-    const expectedTime = getTime(this.props.timeExpected);
+
+    const expectedTime = this.props.timeExpected ? getTime(this.props.timeExpected) : '';
+    const date = expectedTime
+      ? `${formatTime(expectedTime.getHours())}:${formatTime(expectedTime.getMinutes())}`
+      : '';
     return (
       <td>
         {
-          `${formatTime(expectedTime.getHours())}:${formatTime(expectedTime.getMinutes())}`
+          date
         }
       </td>
     )
