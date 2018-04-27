@@ -1,17 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFactory';
 
-export class LogoAirlines extends Component {
+class Logo extends Component {
 
    render() {
-    const {airlines} = this.props.data;
     return(
     <td>
-      <img src={airlines.logo}
-           alt={airlines.name}
-           title={airlines.name}
+      <img src={this.props.pathSrc}
+           alt={this.props.pathName}
+           title={this.props.pathName}
            className={'table-flight--logo-airlines'}/>
     </td>
     )
   }
 }
+
+const mapStateToProps = (state, {data}) => {
+  const pathSrc = ['airlines', 'logo'];
+  const pathName = ['airlines', 'name'];
+  const logoSrcSelector = oneItemSelectorFactory(data, pathSrc);
+  const logoNameSelector = oneItemSelectorFactory(data, pathName);
+  return {
+    pathSrc: logoSrcSelector(state),
+    pathName: logoNameSelector(state),
+  }
+};
+
+export const LogoAirlines = connect(mapStateToProps)(Logo);

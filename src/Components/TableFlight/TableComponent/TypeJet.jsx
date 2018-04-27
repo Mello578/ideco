@@ -1,25 +1,25 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {oneFlightSelectorFactory} from '../../../js/selectors/oneFlightSelectorFactory';
+import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFactory';
 
 
 class Jet extends Component {
 
   render() {
-    const {aircraft} = this.props.flight;
     console.log('typejet')
     return (
       <td>
-        {aircraft.typeJet}
+        {this.props.typeJet}
       </td>
     )
   }
 }
 
 const mapStateToProps = (state, {data}) => {
-  const oneFlightSelector = oneFlightSelectorFactory(data);
+  const path = ['aircraft', 'typeJet'];
+  const oneFlightSelector = oneItemSelectorFactory(data, path);
   return {
-    flight: oneFlightSelector(state)
+    typeJet: oneFlightSelector(state)
   }
 };
 

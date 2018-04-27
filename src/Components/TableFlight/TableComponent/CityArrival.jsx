@@ -1,15 +1,25 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFactory';
 
 
-export class CityArrival extends Component {
+class Arrival extends Component {
 
   render() {
-    const {arrivalCity} = this.props.data;
     return (
       <td>
-        {arrivalCity.city}
+        {this.props.arrivalCity}
       </td>
     )
   }
 }
+
+const mapStateToProps = (state, {data}) => {
+  const path = ['arrivalCity', 'city'];
+  const oneFlightSelector = oneItemSelectorFactory(data, path);
+  return {
+    arrivalCity: oneFlightSelector(state)
+  }
+};
+
+export const CityArrival = connect(mapStateToProps)(Arrival);

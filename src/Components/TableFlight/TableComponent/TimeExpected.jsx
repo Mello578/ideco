@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {formatTime} from '../../../js/utils/formatTime';
 import {getTime} from '../../../js/utils/getTime';
+import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFactory';
 
-export class TimeExpected extends Component {
+class TimeExpect extends Component {
 
   render() {
-    const dateParam = this.props.data.allDataTime;
-    const expectedTime = getTime(dateParam.expectedTime);
+    const expectedTime = getTime(this.props.timeExpected);
     return (
       <td>
         {
@@ -17,3 +17,13 @@ export class TimeExpected extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, {data}) => {
+  const path = ['allDataTime', 'expectedTime'];
+  const oneFlightSelector = oneItemSelectorFactory(data, path);
+  return {
+    timeExpected: oneFlightSelector(state)
+  }
+};
+
+export const TimeExpected = connect(mapStateToProps)(TimeExpect);

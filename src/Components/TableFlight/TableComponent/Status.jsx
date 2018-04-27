@@ -6,15 +6,15 @@ class TableStatus extends Component {
 
   render() {
     return <td>
-             <span id={`status-${this.props.flightStatus}`}>
+             <span id={`status-${this.props.data}`}>
                {this.props.status}
              </span>
     </td>
   }
 }
 
-const mapStateToPropsFactory = (state, {flightStatus}) => {
-  const flightStatusSelector = flightStatusSelectorFactory(flightStatus);
+const mapStateToPropsFactory = (state, {data}) => {
+  const flightStatusSelector = flightStatusSelectorFactory(data);
 
   return (state) => {
     return {

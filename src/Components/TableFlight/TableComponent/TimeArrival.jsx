@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {MONTHS} from '../../../../constants/months';
 import {formatTime} from '../../../js/utils/formatTime';
 import {getTime} from '../../../js/utils/getTime';
+import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFactory';
 
 
-export class TimeArrival extends Component {
+class TimeArriv extends Component {
 
   render() {
-    const dateParam = this.props.data.allDataTime;
-    const timeArrival = getTime(dateParam.timeArrival);
+    const timeArrival = getTime(this.props.timeArrival);
     return (
       <td>
         {
@@ -20,3 +20,13 @@ export class TimeArrival extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, {data}) => {
+  const path = ['allDataTime', 'timeArrival'];
+  const oneFlightSelector = oneItemSelectorFactory(data, path);
+  return {
+    timeArrival: oneFlightSelector(state)
+  }
+};
+
+export const TimeArrival = connect(mapStateToProps)(TimeArriv);

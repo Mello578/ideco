@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import style from './index.css';
 import {getSelectedFlight} from '../BarControl/BarControl';
-import {oneFlightSelectorFactory} from '../../js/selectors/oneFlightSelectorFactory'
+import {oneItemSelectorFactory} from '../../js/selectors/oneItemSelectorFactory'
 
 import {LogoAirlines} from './TableComponent/LogoAirlines';
 import {Airlines} from './TableComponent/Airlines';
@@ -28,7 +28,7 @@ class Body extends Component {
   }
 
   render() {
-    const {backgroundSort, flight, oneFlight} = this.props;
+    const {backgroundSort, oneFlight} = this.props;
     console.log('body')
     return (
       <tr style={{background: backgroundSort % 2 === 0 ? '' : '#e3e3e3'}}
@@ -41,18 +41,16 @@ class Body extends Component {
         <CityArrival data={oneFlight}/>
         <TimeArrival data={oneFlight}/>
         <TimeExpected data={oneFlight}/>
-        <Status flightStatus={oneFlight.id}/>
+        <Status data={oneFlight.id}/>
       </tr>
     )
   }
 }
 
-const mapStateToProps = (state, {oneFlight}) => {
-  const oneFlightSelector = oneFlightSelectorFactory(oneFlight);
+const mapStateToProps = (state) => {
   return {
     allData: state.allDataReducer.data,
-    visible: state.barControlReducer.data,
-    flight: oneFlightSelector(state)
+    visible: state.barControlReducer.data
   }
 };
 
