@@ -5,6 +5,7 @@ export function allDataReducer(state = initialState.allData, action) {
   switch (action.type) {
     case UPDATE_DATA:
       return {
+        ...state,
         data: action.payload,
       };
     default:

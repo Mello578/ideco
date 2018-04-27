@@ -1,8 +1,8 @@
 import {VISIBLE} from '../../../../constants/constants';
 
-export function barControlAction(data) {
+export function barControlAction(payload) {
   return {
     type: VISIBLE,
-    data
+    payload
   }
 }

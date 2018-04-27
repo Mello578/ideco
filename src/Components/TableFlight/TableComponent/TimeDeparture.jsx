@@ -5,7 +5,7 @@ import {formatTime} from '../../../js/utils/formatTime';
 import {getTime} from '../../../js/utils/getTime';
 
 
-class TimeDepart extends Component {
+export class TimeDeparture extends Component {
 
   render() {
     const dateParam = this.props.data.allDataTime;
@@ -20,9 +20,3 @@ class TimeDepart extends Component {
     )
   }
 }
-
-export const TimeDeparture = connect(({allDataReducer}) =>
-  ({
-    allData: allDataReducer.data
-  })
-)(TimeDepart);

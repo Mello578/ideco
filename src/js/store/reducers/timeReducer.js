@@ -5,6 +5,7 @@ export function timeReducer(state = initialState.currentTime, action) {
   switch (action.type) {
     case SET_CURRENT_TIME:
       return {
+        ...state,
         data: action.payload,
       };
     default:

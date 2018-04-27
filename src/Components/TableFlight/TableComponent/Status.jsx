@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {flightStatusSelectorFactory} from '../../../js/selectors';
+import {flightStatusSelectorFactory} from '../../../js/selectors/flightStatusSelectorFactory';
 
 class TableStatus extends Component {
 
   render() {
     return <td>
-             <span id={`status-${this.props.flightId}`}>
+             <span id={`status-${this.props.flightStatus}`}>
                {this.props.status}
              </span>
-          </td>
+    </td>
   }
 }
 
-const mapStateToPropsFactory = (state, {flightId}) => {
-  const flightStatusSelector = flightStatusSelectorFactory(flightId);
+const mapStateToPropsFactory = (state, {flightStatus}) => {
+  const flightStatusSelector = flightStatusSelectorFactory(flightStatus);
 
   return (state) => {
     return {

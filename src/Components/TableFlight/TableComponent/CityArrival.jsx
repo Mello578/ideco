@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 
-class CityArriv extends Component {
+export class CityArrival extends Component {
 
   render() {
     const {arrivalCity} = this.props.data;
@@ -13,9 +13,3 @@ class CityArriv extends Component {
     )
   }
 }
-
-export const CityArrival = connect(({allDataReducer}) =>
-  ({
-    allData: allDataReducer.data
-  })
-)(CityArriv);

@@ -8,6 +8,7 @@ import {STATUS_FLIGHT} from '../../../constants/statusFlight';
 import {getElem} from '../../js/utils/getElem';
 import {updateData} from '../../js/utils/requestsOfData';
 import {getTime} from '../../js/utils/getTime';
+import {dateFormat} from '../../js/utils/dateFormat';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
 const dataCity = require('../../../constants/dataCityesAndAircrafts/cityes');
@@ -22,16 +23,6 @@ export function getSelectedFlight(getFlight) {
 
 class Bar extends Component {
 
-  dateFormat(time) {
-    time = new Date(time);
-    const year = time.getFullYear();
-    const month = formatTime(time.getMonth() + 1); // т.к. нумерация с 0
-    const day = formatTime(time.getDate());
-    const hour = formatTime(time.getHours());
-    const minutes = formatTime(time.getMinutes());
-    return `${year}-${month}-${day}T${hour}:${minutes}`;
-  }
-
   update() {
     let updateFlight = {...selectedFlight};
     if (
@@ -40,9 +31,9 @@ class Bar extends Component {
       || updateFlight.aircraft.typeJet !== this.typeJet.value
       || updateFlight.departureCity.city !== this.departureCity.value
       || updateFlight.arrivalCity.city !== this.arrivalCity.value
-      || this.dateFormat(updateFlight.allDataTime.timeDepart) !== this.timeDepart.value
-      || this.dateFormat(updateFlight.allDataTime.timeArrival) !== this.timeArrival.value
-      || this.dateFormat(updateFlight.allDataTime.expectedTime) !== this.expectedTime.value
+      || dateFormat(updateFlight.allDataTime.timeDepart) !== this.timeDepart.value
+      || dateFormat(updateFlight.allDataTime.timeArrival) !== this.timeArrival.value
+      || dateFormat(updateFlight.allDataTime.expectedTime) !== this.expectedTime.value
     ) {
       const newTimeDepart = getTime(this.timeDepart.value);
       const newTimeArrival = getTime(this.timeArrival.value);
@@ -127,7 +118,7 @@ class Bar extends Component {
                 </td>
                 <td>
                   <input ref={(input) => this.timeDepart = input ? input : ''} type='datetime-local'
-                         defaultValue={this.dateFormat(allDataTime.timeDepart)}/>
+                         defaultValue={dateFormat(allDataTime.timeDepart)}/>
                 </td>
               </tr>
               </tbody>
@@ -158,11 +149,11 @@ class Bar extends Component {
                 </td>
                 <td>
                   <input ref={(input) => this.timeArrival = input ? input : ''} type='datetime-local'
-                         defaultValue={this.dateFormat(allDataTime.timeArrival)}/>
+                         defaultValue={dateFormat(allDataTime.timeArrival)}/>
                 </td>
                 <td>
                   <input ref={(input) => this.expectedTime = input ? input : ''} type='datetime-local'
-                         defaultValue={this.dateFormat(allDataTime.expectedTime)}/>
+                         defaultValue={dateFormat(allDataTime.expectedTime)}/>
                 </td>
                 <td>
                   <select ref={(select) => this.status = select ? select : ''} defaultValue={flightStatus}

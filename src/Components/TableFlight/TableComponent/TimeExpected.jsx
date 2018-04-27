@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {formatTime} from '../../../js/utils/formatTime';
 import {getTime} from '../../../js/utils/getTime';
 
-class TimeExp extends Component {
+export class TimeExpected extends Component {
 
   render() {
     const dateParam = this.props.data.allDataTime;
@@ -17,9 +17,3 @@ class TimeExp extends Component {
     )
   }
 }
-
-export const TimeExpected = connect(({allDataReducer}) =>
-  ({
-    allData: allDataReducer.data
-  })
-)(TimeExp);

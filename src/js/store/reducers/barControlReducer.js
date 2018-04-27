@@ -5,6 +5,7 @@ export function barControlReducer(state = initialState.visibleBarControl, action
   switch (action.type) {
     case VISIBLE:
       return {
+        ...state,
         data: action.payload,
       };
     default:

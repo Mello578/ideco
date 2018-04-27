@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
-
-class AirlinesName extends Component {
+export class Airlines extends Component {
 
   render() {
     const {airlines} = this.props.data;
@@ -13,9 +11,3 @@ class AirlinesName extends Component {
     )
   }
 }
-
-export const Airlines = connect(({allDataReducer}) =>
-  ({
-    allData: allDataReducer.data
-  })
-)(AirlinesName);

@@ -3,7 +3,7 @@ import {STATUS_FLIGHT} from '../../../constants/statusFlight';
 
 const MIN = 60 * 1000;
 
-export const flightStatusSelectorFactory = (flightId) => {
+export const flightStatusSelectorFactory = (flightStatus) => {
   return createSelector(
     [
       ({timeReducer}) => timeReducer.data,
@@ -16,7 +16,7 @@ export const flightStatusSelectorFactory = (flightId) => {
           expectedTime,
         },
         status
-      } = flights.find((f) => f.id === flightId);
+      } = flights.find((f) => f.id === flightStatus);
 
       const currentTimeTimestamp = currentTime.getTime();
       const timeDepartTimestamp = new Date(timeDepart).getTime();
@@ -26,7 +26,7 @@ export const flightStatusSelectorFactory = (flightId) => {
       const timeFlew = timeDepartTimestamp - 10 * MIN;
       const timeEndFlew = timeDepartTimestamp + 5 * MIN;
 
-      if(status === undefined){
+      if(status === undefined){ //нужно задать статусы которые автоматом перебираются
         switch (true){
           case currentTimeTimestamp < timeBeforeBoarding:
             return STATUS_FLIGHT.beforeBoarding;
