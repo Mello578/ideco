@@ -37,7 +37,7 @@ class Table extends Component {
         {
           this.props.allData ? this.props.allData.map((item, key) => {
             return (
-              <TableBody oneFlight={item} key={key} backgroundSort={key}/>
+              <TableBody oneFlight={item} key={item.id} backgroundSort={key}/>
             )
           }) : ''
         }

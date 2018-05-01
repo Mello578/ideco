@@ -47,7 +47,7 @@ class Bar extends Component {
       updateFlight.allDataTime.timeDepart = newTimeDepart;
       updateFlight.allDataTime.timeArrival = newTimeArrival;
       updateFlight.allDataTime.expectedTime = newExpectedTime;
-      updateData(updateFlight);
+      updateData(updateFlight, this.props.filterData);
     }
   }
 
@@ -184,9 +184,10 @@ class Bar extends Component {
   }
 }
 
-export const BarControl = connect(({barControlReducer}) =>
+export const BarControl = connect(({barControlReducer, filterDataReducer}) =>
     ({
       visible: barControlReducer.data,
+      filterData: filterDataReducer.data
     }),
   dispatch => ({
     setVisible(mode) {

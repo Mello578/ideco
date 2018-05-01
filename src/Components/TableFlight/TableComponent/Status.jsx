@@ -15,8 +15,7 @@ class TableStatus extends Component {
 
 const mapStateToPropsFactory = (state, {data}) => {
   const flightStatusSelector = flightStatusSelectorFactory(data);
-
-  return (state) => {
+   return (state) => {
     return {
       status: flightStatusSelector(state),
     };

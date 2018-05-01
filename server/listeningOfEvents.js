@@ -10,9 +10,10 @@ let allData = selectionOfFlights().sort(compareDate);
 function listenOfEvents(socket) {
   sendData(socket, allData);
 
-  socket.on(UPDATE_DATA, (data) => {
+  socket.on(UPDATE_DATA, (data, filterData) => {
     allData = updateData(allData, data).sort(compareDate);
-    dataAcquisition(socket, allData);
+    const filteredData = filterCity(allData, filterData);
+    dataAcquisition(socket, filteredData);
   });
 
   socket.on(FILTER_DATA, (params) => {

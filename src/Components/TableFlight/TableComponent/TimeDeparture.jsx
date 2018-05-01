@@ -27,9 +27,11 @@ class TimeDepart extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['allDataTime', 'timeDepart'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    timeDeparture: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      timeDeparture: oneFlightSelector(state)
+    };
+  };
 };
 
 export const TimeDeparture = connect(mapStateToProps)(TimeDepart);

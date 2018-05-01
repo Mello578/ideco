@@ -25,9 +25,11 @@ class TimeExpect extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['allDataTime', 'expectedTime'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    timeExpected: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      timeExpected: oneFlightSelector(state)
+    };
+  };
 };
 
 export const TimeExpected = connect(mapStateToProps)(TimeExpect);

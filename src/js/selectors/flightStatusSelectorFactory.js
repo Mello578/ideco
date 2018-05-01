@@ -3,31 +3,37 @@ import {STATUS_FLIGHT} from '../../../constants/statusFlight';
 
 const MIN = 60 * 1000;
 
-export const flightStatusSelectorFactory = (flightStatus) => {
+export const flightStatusSelectorFactory = (flightId) => {
   return createSelector(
     [
       ({timeReducer}) => timeReducer.data,
       ({allDataReducer}) => allDataReducer.data,
     ],
     (currentTime, flights) => {
-      const {
-        allDataTime: {
-          timeDepart,
-          expectedTime,
-        },
-        status
-      } = flights.find((f) => f.id === flightStatus);
+
+      const data = flights.find((f) => f.id === flightId);
+      const timeDepart = data ? data.allDataTime.timeDepart : undefined;
+      const expectedTime = data ? data.allDataTime.expectedTime : undefined;
 
       const currentTimeTimestamp = currentTime.getTime();
-      const timeDepartTimestamp = new Date(timeDepart).getTime();
-      const expectedTimeTimestamp = new Date(expectedTime).getTime();
+      let status,
+        timeDepartTimestamp,
+        expectedTimeTimestamp,
+        timeBeforeBoarding,
+        timeFlew,
+        timeEndFlew;
 
-      const timeBeforeBoarding = timeDepartTimestamp - 50 * MIN;
-      const timeFlew = timeDepartTimestamp - 10 * MIN;
-      const timeEndFlew = timeDepartTimestamp + 5 * MIN;
+      if (data) {
+        status = data.status;
+        timeDepartTimestamp = new Date(timeDepart).getTime();
+        expectedTimeTimestamp = new Date(expectedTime).getTime();
+        timeBeforeBoarding = timeDepartTimestamp - 50 * MIN;
+        timeFlew = timeDepartTimestamp - 10 * MIN;
+        timeEndFlew = timeDepartTimestamp + 5 * MIN;
+      }
 
-      if(status === undefined){ //нужно задать статусы которые автоматом перебираются
-        switch (true){
+      if (status === undefined) { //нужно задать статусы которые автоматом перебираются
+        switch (true) {
           case currentTimeTimestamp < timeBeforeBoarding:
             return STATUS_FLIGHT.beforeBoarding;
             break;
@@ -44,8 +50,9 @@ export const flightStatusSelectorFactory = (flightStatus) => {
             return STATUS_FLIGHT.landed;
             break;
         }
-      }else{
-        return status; // возвращаем статус, т.к. дает больше гибкости. Пр-ры статусов которые не нужно автоматически менять: Отменен, Совмещен, Поломка. Либо делать доп поле для комментариев
+      }
+      else {
+        return 'status'; // возвращаем статус, т.к. дает больше гибкости. Пр-ры статусов которые не нужно автоматически менять: Отменен, Совмещен, Поломка. Либо делать доп поле для комментариев
       }
     }
   );

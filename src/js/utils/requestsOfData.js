@@ -11,13 +11,13 @@ export function addAllData(data) {
   store.dispatch({type: allData.type, payload: allData.data});
 }
 
-export function updateData(data) {
+export function updateData(data, filterData) {
   if(data){
-    socket.emit(UPDATE_DATA, data);
+    socket.emit(UPDATE_DATA, data,  filterData);
   }
 }
 
-export function filerData(data) {
+export function filterData(data) {
   if(data){
     socket.emit(FILTER_DATA, data);
   }

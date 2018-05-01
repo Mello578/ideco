@@ -27,9 +27,11 @@ class TimeArriv extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['allDataTime', 'timeArrival'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    timeArrival: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      timeArrival: oneFlightSelector(state)
+    };
+  };
 };
 
 export const TimeArrival = connect(mapStateToProps)(TimeArriv);

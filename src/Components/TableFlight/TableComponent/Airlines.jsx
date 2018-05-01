@@ -16,9 +16,11 @@ class AirlinesName extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['airlines', 'flight'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    flight: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      flight: oneFlightSelector(state)
+    };
+  };
 };
 
 export const Airlines = connect(mapStateToProps)(AirlinesName);

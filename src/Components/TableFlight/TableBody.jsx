@@ -28,20 +28,22 @@ class Body extends Component {
   }
 
   render() {
-    console.log('body')
+
     const {backgroundSort, oneFlight} = this.props;
+    const {id} = oneFlight;
+    console.log('body ')
     return (
       <tr style={{background: backgroundSort % 2 === 0 ? '' : '#e3e3e3'}}
           onClick={() => this.visibleBarControl(oneFlight, Status)}>
-        <LogoAirlines data={oneFlight}/>
-        <Airlines data={oneFlight}/>
-        <TypeJet data={oneFlight}/>
-        <CityDeparture data={oneFlight}/>
-        <TimeDeparture data={oneFlight}/>
-        <CityArrival data={oneFlight}/>
-        <TimeArrival data={oneFlight}/>
-        <TimeExpected data={oneFlight}/>
-        <Status data={oneFlight.id}/>
+        <LogoAirlines data={id}/>
+        <Airlines data={id}/>
+        <TypeJet data={id}/>
+        <CityDeparture data={id}/>
+        <TimeDeparture data={id}/>
+        <CityArrival data={id}/>
+        <TimeArrival data={id}/>
+        <TimeExpected data={id}/>
+        <Status data={id}/>
       </tr>
     )
   }

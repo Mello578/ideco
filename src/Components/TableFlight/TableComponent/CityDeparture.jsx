@@ -16,9 +16,11 @@ class Departure extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['departureCity', 'city'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    departureCity: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      departureCity: oneFlightSelector(state)
+    };
+  };
 };
 
 export const CityDeparture = connect(mapStateToProps)(Departure);

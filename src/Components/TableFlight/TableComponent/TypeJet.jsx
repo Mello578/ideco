@@ -6,6 +6,7 @@ import {oneItemSelectorFactory} from '../../../js/selectors/oneItemSelectorFacto
 class Jet extends Component {
 
   render() {
+    console.log('jet')
     return (
       <td>
         {this.props.typeJet}
@@ -17,9 +18,11 @@ class Jet extends Component {
 const mapStateToProps = (state, {data}) => {
   const path = ['aircraft', 'typeJet'];
   const oneFlightSelector = oneItemSelectorFactory(data, path);
-  return {
-    typeJet: oneFlightSelector(state)
-  }
+  return (state) => {
+    return {
+      typeJet: oneFlightSelector(state)
+    };
+  };
 };
 
 export const TypeJet = connect(mapStateToProps)(Jet);
