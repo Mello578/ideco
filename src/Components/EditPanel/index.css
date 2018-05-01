@@ -58,3 +58,19 @@ input[type=datetime-local]{
 	display: flex;
 	justify-content: space-around;
 }
+
+.edit-panel--button {
+	background: #00000073;
+	color: #fff;
+	height: 25px;
+	width: 100px;
+	border: none;
+	border-radius: 3px;
+	font-weight: bold;
+}
+
+.edit-panel--button:hover {
+	position: relative;
+	top: 1px;
+	right: 1px;
+}

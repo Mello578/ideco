@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import style from './index.css';
-import {getSelectedFlight} from '../BarControl/BarControl';
-import {oneItemSelectorFactory} from '../../js/selectors/oneItemSelectorFactory'
+import {getSelectedFlight} from '../EditPanel/EditPanel';
 
 import {LogoAirlines} from './TableComponent/LogoAirlines';
 import {Airlines} from './TableComponent/Airlines';

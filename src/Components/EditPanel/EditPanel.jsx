@@ -19,7 +19,7 @@ export function getSelectedFlight(getFlight) {
   flightStatus = getElem(`status-${getFlight.id}`).innerHTML;
 }
 
-class Bar extends Component {
+class Panel extends Component {
 
   update() {
     let updateFlight = {...selectedFlight};
@@ -173,8 +173,8 @@ class Bar extends Component {
           </div>
 
           <div className={'block-button'}>
-            <button onClick={() => this.update()}>Сохранить</button>
-            <button onClick={() => this.canceled()}>Отменить</button>
+            <button className={'edit-panel--button'} onClick={() => this.update()}>Сохранить</button>
+            <button className={'edit-panel--button'} onClick={() => this.canceled()}>Отменить</button>
           </div>
         </div>
       </div>
@@ -182,7 +182,7 @@ class Bar extends Component {
   }
 }
 
-export const BarControl = connect(({barControlReducer, filterDataReducer}) =>
+export const EditPanel = connect(({barControlReducer, filterDataReducer}) =>
     ({
       visible: barControlReducer.data,
       filterData: filterDataReducer
@@ -192,4 +192,4 @@ export const BarControl = connect(({barControlReducer, filterDataReducer}) =>
       dispatch({type: mode.type, payload: mode.data})
     }
   })
-)(Bar);
+)(Panel);

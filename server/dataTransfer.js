@@ -6,7 +6,6 @@ function sendData(socket, data){
 
 function dataAcquisition(socket, data){
   sendData(socket, data);
-  console.log('выззвался дата апдейт')
 }
 
 module.exports = {

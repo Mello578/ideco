@@ -37,8 +37,6 @@ class Panel extends Component {
         <button className={'button panel-control--button-revers'} onClick={() => this.select()}></button>
         <input ref={(input) => this.cityArrival = input} onChange={() => this.filter()} className={'city-input'}
                type='text'/>
-        <button className={'button panel-control--button-filter'}>Фильтр</button>
-
       </div>
     )
   }

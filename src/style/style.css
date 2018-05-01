@@ -8,6 +8,6 @@ body {
 	background: rgba(249, 216, 216, 0.29);
 }
 
-td, button, select {
+td, th, button, select {
 	cursor: pointer;
 }

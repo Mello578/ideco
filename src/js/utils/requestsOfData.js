@@ -1,4 +1,4 @@
-import {PORT, UPDATE_DATA, GET_DATA, FILTER_DATA} from '../../../constants/constants';
+import {PORT, UPDATE_DATA, GET_DATA, FILTER_DATA, SORTING_DATA} from '../../../constants/constants';
 import {allDataAction} from '../store/actions/allDataAction';
 import {store} from '../../index';
 
@@ -12,18 +12,18 @@ export function addAllData(data) {
 }
 
 export function updateData(data, filterData) {
-  if(data){
-    socket.emit(UPDATE_DATA, data,  filterData);
-  }
+  socket.emit(UPDATE_DATA, data, filterData);
 }
 
 export function filterData(data) {
-  if(data){
-    socket.emit(FILTER_DATA, data);
-  }
+  socket.emit(FILTER_DATA, data);
 }
 
-(()=>{
+export function sortingData(column, filterData) {
+  socket.emit(SORTING_DATA, column, filterData)
+}
+
+(() => {
   socket.on(GET_DATA, function (data) { //прослушка + запуск функции для получения данных
     addAllData(data);
   });

@@ -1,23 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import style from './index.css';
-import {getSelectedFlight} from '../BarControl/BarControl';
 import {TableBody} from './TableBody';
+import {sortingData} from '../../js/utils/requestsOfData';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
 
-import {LogoAirlines} from './TableComponent/LogoAirlines';
-import {Airlines} from './TableComponent/Airlines';
-import {TypeJet} from './TableComponent/TypeJet';
-import {CityDeparture} from './TableComponent/CityDeparture';
-import {TimeDeparture} from './TableComponent/TimeDeparture';
-import {CityArrival} from './TableComponent/CityArrival';
-import {TimeArrival} from './TableComponent/TimeArrival';
-import {TimeExpected} from './TableComponent/TimeExpected';
-import {Status} from './TableComponent/Status';
-import {barControlAction} from '../../js/store/actions/barControlAction';
-
 class Table extends Component {
+
+  sortingByColumns(e) {
+    sortingData(e.target.cellIndex, this.props.filterData);
+  }
 
   render() {
     return (
@@ -26,7 +19,7 @@ class Table extends Component {
         <tr>
           {
             TABLE_HEADER.split(',').map((item, key) => {
-              return (<th key={key}>
+              return (<th key={key} onClick={(e) => this.sortingByColumns(e)}>
                 {item}
               </th>)
             })
@@ -48,8 +41,9 @@ class Table extends Component {
   }
 }
 
-export const TableFlight = connect(({allDataReducer}) =>
+export const TableFlight = connect(({allDataReducer, filterDataReducer}) =>
   ({
     allData: allDataReducer.data,
+    filterData: filterDataReducer
   })
 )(Table);

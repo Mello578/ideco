@@ -4,7 +4,7 @@ import {PanelControl} from '../PanelControl/PanelControl';
 import {TableFlight} from '../TableFlight/TableFlight';
 import {connect} from 'react-redux';
 import {CurrentTime} from '../CurrentTime/CurrentTime';
-import {BarControl} from '../BarControl/BarControl';
+import {EditPanel} from '../EditPanel/EditPanel';
 
 class App extends Component {
 
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div>
         {
-          this.props.visible ? <BarControl /> : ''
+          this.props.visible ? <EditPanel /> : ''
         }
         <div className={'container'}>
           <div className={'container--header'}>
