@@ -31,7 +31,6 @@ class Body extends Component {
 
     const {backgroundSort, oneFlight} = this.props;
     const {id} = oneFlight;
-    console.log('body ')
     return (
       <tr style={{background: backgroundSort % 2 === 0 ? '' : '#e3e3e3'}}
           onClick={() => this.visibleBarControl(oneFlight, Status)}>
