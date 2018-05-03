@@ -1,6 +1,6 @@
 module.exports = {
   PORT: 3000,
-  UPDATE_DATA: 'UPDATE_DATA',
+  UPDATE_DATA: 'updateData',
   FILTER_DATA: 'filterData',
   SORTING_DATA: 'sortingData',
   DELETED_FLIGHT: 'deleteFlight',
