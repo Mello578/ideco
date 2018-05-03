@@ -122,7 +122,7 @@ class Panel extends Component {
               <tr>
                 <td>
                   <div>
-                    <select ref={(select) => this.airlinesName = select} defaultValue={flightStatus}
+                    <select ref={(select) => this.airlinesName = select} defaultValue={airlines ? airlines.name : ''}
                             className={'select'} name='status' id='block-status'>
                       {
                         arrayAirlanes.map((item, key) => {

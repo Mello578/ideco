@@ -1,4 +1,5 @@
 const OneFlight = require('../../classes/OneFlight');
+const allAirlines = require('../../constants/dataCityesAndAircrafts/airlines');
 
 function updateData(allData, editedObject) {
   const {id, departureCity, arrivalCity, aircraft, airlines, allDataTime} = editedObject;
@@ -11,6 +12,7 @@ function updateData(allData, editedObject) {
   if (editedObject.status !== undefined && editedObject.status !== '') {
     newFlight.status = editedObject.status;
   }
+  newFlight.airlines.logo = allAirlines.find((item) => item.name === airlines.name).logo;
   const updatingAllData = allData.filter((item) => item.id !== id);
   updatingAllData.push(newFlight);
 
