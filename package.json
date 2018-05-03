@@ -21,13 +21,20 @@
     "socket.io": "^2.1.0"
   },
   "devDependencies": {
+    "autoprefixer": "^8.4.1",
     "babel-core": "5.8.24",
     "babel-loader": "5.x",
     "css-loader": "^0.28.11",
-    "imports-loader": "^0.7.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^0.11.2",
+    "imports-loader": "^0.7.1",
     "nodemon": "^1.12.5",
+    "postcss-loader": "^2.1.4",
     "style-loader": "^0.21.0",
     "webpack": "3.2.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }

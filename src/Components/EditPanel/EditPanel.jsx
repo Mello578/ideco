@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-import style from './index.css'
+import style from './index.css';
 import {barControlAction} from '../../js/store/actions/barControlAction';
-import {STATUS_FLIGHT, STATUS_FLIGHT_BLOCKED} from '../../../constants/statusFlight';
+import {STATUS_FLIGHT_BLOCKED} from '../../../constants/statusFlight';
 import {getElem} from '../../js/utils/getElem';
 import {createFlight, deleteFlight, updateData} from '../../js/utils/requestsOfData';
 import {getTime} from '../../js/utils/getTime';
