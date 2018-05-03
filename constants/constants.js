@@ -3,6 +3,8 @@ module.exports = {
   UPDATE_DATA: 'UPDATE_DATA',
   FILTER_DATA: 'filterData',
   SORTING_DATA: 'sortingData',
+  DELETED_FLIGHT: 'deleteFlight',
+  CREATE_FLIGHT: 'createFlight',
   GET_DATA: 'get_data',
   FLIGHT_UPDATE: 'flightUpdate',
   SET_CURRENT_TIME: 'setCurrentTime',

@@ -25,10 +25,19 @@
 	background-size: 68%;
 }
 
-.panel-control--button-revers:active {
+.panel-control--button-revers:active,
+.panel-control--button-create:active{
 	position: relative;
 	right: 1px;
 	top: 1px;
+}
+
+.panel-control--button-create {
+	margin-left: 20px;
+	height: 26px;
+	width: 100px;
+	background: rgba(70, 68, 68, 0.75);
+	color: #fff;
 }
 
 .city-input,

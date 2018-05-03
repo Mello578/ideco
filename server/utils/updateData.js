@@ -8,6 +8,9 @@ function updateData(allData, editedObject) {
     timeArrival: new Date(allDataTime.timeArrival),
     expectedTime: new Date(allDataTime.expectedTime)
   };
+  if (editedObject.status !== undefined && editedObject.status !== '') {
+    newFlight.status = editedObject.status;
+  }
   const updatingAllData = allData.filter((item) => item.id !== id);
   updatingAllData.push(newFlight);
 

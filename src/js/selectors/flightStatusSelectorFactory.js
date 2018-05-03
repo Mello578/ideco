@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {STATUS_FLIGHT} from '../../../constants/statusFlight';
+import {STATUS_FLIGHT, STATUS_FLIGHT_BLOCKED} from '../../../constants/statusFlight';
 
 const MIN = 60 * 1000;
 
@@ -32,7 +32,7 @@ export const flightStatusSelectorFactory = (flightId) => {
         timeEndFlew = timeDepartTimestamp + 5 * MIN;
       }
 
-      if (status === undefined) { //нужно задать статусы которые автоматом перебираются
+      if (status !== STATUS_FLIGHT_BLOCKED.cancelled) { //нужно задать статусы которые автоматом перебираются
         switch (true) {
           case currentTimeTimestamp < timeBeforeBoarding:
             return STATUS_FLIGHT.beforeBoarding;
@@ -52,7 +52,7 @@ export const flightStatusSelectorFactory = (flightId) => {
         }
       }
       else {
-        return 'status'; // возвращаем статус, т.к. дает больше гибкости. Пр-ры статусов которые не нужно автоматически менять: Отменен, Совмещен, Поломка. Либо делать доп поле для комментариев
+        return STATUS_FLIGHT.cancelled; // возвращаем статус, т.к. дает больше гибкости. Пр-ры статусов которые не нужно автоматически менять: Отменен, Совмещен, Поломка. Либо делать доп поле для комментариев
       }
     }
   );

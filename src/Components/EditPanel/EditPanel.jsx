@@ -3,13 +3,14 @@ import {connect} from 'react-redux';
 
 import style from './index.css'
 import {barControlAction} from '../../js/store/actions/barControlAction';
-import {STATUS_FLIGHT} from '../../../constants/statusFlight';
+import {STATUS_FLIGHT, STATUS_FLIGHT_BLOCKED} from '../../../constants/statusFlight';
 import {getElem} from '../../js/utils/getElem';
-import {updateData} from '../../js/utils/requestsOfData';
+import {createFlight, deleteFlight, updateData} from '../../js/utils/requestsOfData';
 import {getTime} from '../../js/utils/getTime';
 import {dateFormat} from '../../js/utils/dateFormat';
 
 const {TABLE_HEADER} = require('../../../constants/constants');
+const allAirlines = require('../../../constants/dataCityesAndAircrafts/airlines');
 
 let selectedFlight = null;
 let flightStatus = null;
@@ -22,16 +23,36 @@ export function getSelectedFlight(getFlight) {
 class Panel extends Component {
 
   update() {
-    let updateFlight = {...selectedFlight};
-
-    if (updateFlight.airlines.name !== this.airlinesName.value
-      || updateFlight.airlines.flight !== this.airlinesFlight.value
-      || updateFlight.aircraft.typeJet !== this.typeJet.value
-      || updateFlight.departureCity.city !== this.departureCity.value
-      || updateFlight.arrivalCity.city !== this.arrivalCity.value
-      || dateFormat(updateFlight.allDataTime.timeDepart) !== this.timeDepart.value
-      || dateFormat(updateFlight.allDataTime.timeArrival) !== this.timeArrival.value
-      || dateFormat(updateFlight.allDataTime.expectedTime) !== this.expectedTime.value
+    let updateFlight = {
+      airlines: {},
+      aircraft: {},
+      departureCity: {},
+      arrivalCity: {},
+      allDataTime: {},
+    };
+    if (selectedFlight) {
+      updateFlight = {...selectedFlight};
+      if (updateFlight.airlines.name === this.airlinesName.value
+        && updateFlight.airlines.flight === this.airlinesFlight.value
+        && updateFlight.aircraft.typeJet === this.typeJet.value
+        && updateFlight.departureCity.city === this.departureCity.value
+        && updateFlight.arrivalCity.city === this.arrivalCity.value
+        && dateFormat(updateFlight.allDataTime.timeDepart) === this.timeDepart.value
+        && dateFormat(updateFlight.allDataTime.timeArrival) === this.timeArrival.value
+        && dateFormat(updateFlight.allDataTime.expectedTime) === this.expectedTime.value
+        && this.status.value !== STATUS_FLIGHT_BLOCKED.cancelled
+      ) {
+        return
+      }
+    }
+    if (this.timeDepart.value
+      && this.timeArrival.value
+      && this.expectedTime.value
+      && this.airlinesName.value
+      && this.airlinesFlight.value
+      && this.typeJet.value
+      && this.departureCity.value
+      && this.arrivalCity.value
     ) {
       const newTimeDepart = getTime(this.timeDepart.value);
       const newTimeArrival = getTime(this.timeArrival.value);
@@ -45,14 +66,25 @@ class Panel extends Component {
       updateFlight.allDataTime.timeDepart = newTimeDepart;
       updateFlight.allDataTime.timeArrival = newTimeArrival;
       updateFlight.allDataTime.expectedTime = newExpectedTime;
-      updateData(updateFlight, this.props.filterData);
+      this.status.value === STATUS_FLIGHT_BLOCKED.cancelled
+        ? updateFlight.status = STATUS_FLIGHT_BLOCKED.cancelled
+        : '';
+      selectedFlight
+        ? updateData(updateFlight, this.props.filterData)
+        : createFlight(updateFlight, this.props.filterData);
+    } else {
+      alert('Заполните все поля')
     }
+
   }
 
   canceled() {
-    const {visible} = this.props;
-    const newVisible = barControlAction(!visible);
+    const newVisible = barControlAction(!this.props.visible);
     this.props.setVisible(newVisible);
+  }
+
+  deleted() {
+    deleteFlight(selectedFlight.id);
   }
 
   componentWillUnmount() {
@@ -65,8 +97,8 @@ class Panel extends Component {
     const arrayHeader = TABLE_HEADER.split(',');
     const headerOne = arrayHeader.slice(0, 5);
     const headerTwo = arrayHeader.slice(5);
-    const arrayStatus = Object.values(STATUS_FLIGHT);
-
+    const arrayStatus = Object.values(STATUS_FLIGHT_BLOCKED);
+    const arrayAirlanes = allAirlines.map((item) => item.name);
     return (
       <div className={'bar-control'}>
         <div className={'bar-control--dark-background'}></div>
@@ -91,32 +123,43 @@ class Panel extends Component {
               <tr>
                 <td>
                   <div>
-                    <input ref={(input) => this.airlinesName = input}
-                           className={'input-edited'} id='block-airline' defaultValue={airlines.name}></input>
+                    <select ref={(select) => this.airlinesName = select} defaultValue={flightStatus}
+                            className={'select'} name='status' id='block-status'>
+                      {
+                        arrayAirlanes.map((item, key) => {
+                          return (
+                            <option key={key} value={item}>
+                              {item}
+                            </option>
+                          )
+                        })
+                      }
+                    </select>
                   </div>
                 </td>
                 <td>
                   <div>
                     <input ref={(input) => this.airlinesFlight = input}
-                           className={'input-edited'} id='block-flight' defaultValue={airlines.flight}></input>
+                           className={'input-edited'} id='block-flight'
+                           defaultValue={airlines ? airlines.flight : ''}></input>
                   </div>
                 </td>
                 <td>
                   <div>
                     <input ref={(input) => this.typeJet = input} className={'input-edited'}
-                           id='block-typeJet' defaultValue={aircraft.typeJet}></input>
+                           id='block-typeJet' defaultValue={aircraft ? aircraft.typeJet : ''}></input>
                   </div>
                 </td>
                 <td>
                   <div>
                     <input ref={(input) => this.departureCity = input}
                            className={'input-edited'} id='block-departureCity'
-                           defaultValue={departureCity.city}></input>
+                           defaultValue={departureCity ? departureCity.city : ''}></input>
                   </div>
                 </td>
                 <td>
                   <input ref={(input) => this.timeDepart = input} type='datetime-local'
-                         defaultValue={dateFormat(allDataTime.timeDepart)}/>
+                         defaultValue={allDataTime ? dateFormat(allDataTime.timeDepart) : ''}/>
                 </td>
               </tr>
               </tbody>
@@ -142,16 +185,16 @@ class Panel extends Component {
                   <div>
                     <input ref={(input) => this.arrivalCity = input}
                            className={'input-edited'} name='arrivalCity' id='block-arrivalCity'
-                           defaultValue={arrivalCity.city}></input>
+                           defaultValue={arrivalCity ? arrivalCity.city : ''}></input>
                   </div>
                 </td>
                 <td>
                   <input ref={(input) => this.timeArrival = input} type='datetime-local'
-                         defaultValue={dateFormat(allDataTime.timeArrival)}/>
+                         defaultValue={allDataTime ? dateFormat(allDataTime.timeArrival) : ''}/>
                 </td>
                 <td>
                   <input ref={(input) => this.expectedTime = input} type='datetime-local'
-                         defaultValue={dateFormat(allDataTime.expectedTime)}/>
+                         defaultValue={allDataTime ? dateFormat(allDataTime.expectedTime) : ''}/>
                 </td>
                 <td>
                   <select ref={(select) => this.status = select} defaultValue={flightStatus}
@@ -175,6 +218,9 @@ class Panel extends Component {
           <div className={'block-button'}>
             <button className={'edit-panel--button'} onClick={() => this.update()}>Сохранить</button>
             <button className={'edit-panel--button'} onClick={() => this.canceled()}>Отменить</button>
+            <button className={'edit-panel--button'} style={{display: selectedFlight ? 'block' : 'none'}}
+                    onClick={() => this.deleted()}>Удалить
+            </button>
           </div>
         </div>
       </div>

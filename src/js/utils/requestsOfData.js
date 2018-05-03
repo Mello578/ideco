@@ -1,4 +1,4 @@
-import {PORT, UPDATE_DATA, GET_DATA, FILTER_DATA, SORTING_DATA} from '../../../constants/constants';
+import {PORT, UPDATE_DATA, GET_DATA, FILTER_DATA, SORTING_DATA, DELETED_FLIGHT, CREATE_FLIGHT} from '../../../constants/constants';
 import {allDataAction} from '../store/actions/allDataAction';
 import {store} from '../../index';
 
@@ -21,6 +21,14 @@ export function filterData(data) {
 
 export function sortingData(column, filterData) {
   socket.emit(SORTING_DATA, column, filterData)
+}
+
+export function deleteFlight(id) {
+  socket.emit(DELETED_FLIGHT, id)
+}
+
+export function createFlight(id, filterData) {
+  socket.emit(CREATE_FLIGHT, id, filterData)
 }
 
 (() => {

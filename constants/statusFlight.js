@@ -4,5 +4,9 @@ export const STATUS_FLIGHT = {
   flew: 'взлетает',
   flies: 'летит',
   landed: 'приземлился',
+};
+
+export const STATUS_FLIGHT_BLOCKED = {
+  open: '',
   cancelled:'отменен',
 };
