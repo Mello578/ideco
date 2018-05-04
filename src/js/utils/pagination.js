@@ -18,12 +18,14 @@ export function pagination(rows = 10) {
     $(this).addClass('active');
     const currPage = $(this).attr('rel');
     const startItem = currPage * rowsShown;
+    const endItem = startItem + rowsShown;
+
     const numbShowRows = (rowsTotal - startItem) > rowsShown
       ? rowsShown
       : rowsTotal - startItem;
     const infoRows = `Показано ${numbShowRows} из ${rowsTotal} рейсов`;
     $('.infoRows').text(infoRows);
-    const endItem = startItem + rowsShown;
+
     $('#tableFlight tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).css('display', 'table-row').animate({opacity: 1}, 300);
   });
   $('#nav a:first').click();
