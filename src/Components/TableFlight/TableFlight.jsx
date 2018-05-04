@@ -13,13 +13,16 @@ class Table extends Component {
     sortingData(e.target.cellIndex, this.props.filterData);
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     window.onload = () => {
       pagination();
+
     }
+    pagination();
   }
 
   render() {
+
     return (
       <table className={'table-flight'} id={'tableFlight'}>
         <thead className={'table-flight--header'}>

@@ -16,6 +16,8 @@ class Panel extends Component {
     };
     this.props.filterCity(cities);
     filterData(cities);
+    pagination(this.props.numberRows);
+    console.log(this.props.numberRows)
   }
 
   select() {
@@ -38,8 +40,8 @@ class Panel extends Component {
 
   setNumbRows(){
     const select = this.selectNumbRows.value;
-    pagination(select);
     this.props.numbRows(select);
+    pagination(select);
   }
 
   render() {
@@ -67,7 +69,7 @@ class Panel extends Component {
 const mapStateToProps = (state) => {
   return {
     visible: state.barControlReducer.data,
-    numbRows: state.numbRowsReducer,
+    numberRows: state.numbRowsReducer,
   }
 };
 
