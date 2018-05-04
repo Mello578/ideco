@@ -27,6 +27,7 @@
 #nav {
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	margin-top: 20px;
 }
 
@@ -39,4 +40,8 @@
 	text-decoration: none;
 	position: relative;
 	top: -2px;
+}
+
+.infoRows {
+	min-width: 210px;
 }
