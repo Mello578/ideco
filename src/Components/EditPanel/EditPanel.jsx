@@ -74,7 +74,6 @@ class Panel extends Component {
     } else {
       alert('Заполните все поля')
     }
-
   }
 
   canceled() {

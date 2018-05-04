@@ -11,3 +11,7 @@ body {
 td, th, button, select {
 	cursor: pointer;
 }
+
+#tableFlight > tbody tr {
+	display: none;
+}
