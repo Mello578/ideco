@@ -44,3 +44,15 @@
 	border: 1px solid #cccaca;
 	outline: none;
 }
+
+.panel-control--numb-rows {
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.select-numb-rows{
+	margin-left: 5px;
+	height: 26px;
+	width: 50px;
+}

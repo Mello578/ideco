@@ -5,5 +5,6 @@ export let initialState = {
   filterData: {
     cityDepart: '',
     cityArrival: ''
-  }
+  },
+  numbRows: 10
 };
