@@ -17,7 +17,6 @@ class Panel extends Component {
     this.props.filterCity(cities);
     filterData(cities);
     pagination(this.props.numberRows);
-    console.log(this.props.numberRows)
   }
 
   select() {

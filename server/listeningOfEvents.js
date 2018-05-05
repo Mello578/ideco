@@ -9,46 +9,50 @@ const sortingByColumns = require('./utils/sortingByColumns');
 
 const MINUTES = 1000 * 60;
 
-let allData = selectionOfFlights().sort(compareDate);
+let fullData = selectionOfFlights();
+let allSortTimeData = timeFilterData(fullData).sort(compareDate);
 
 function listenOfEvents(socket) {
-  sendData(socket, timeFilterData(allData));
+  sendData(socket, timeFilterData(allSortTimeData));
 
   socket.on(UPDATE_DATA, (data, params) => {
-    allData = updateData(allData, data).sort(compareDate);
-    const filteredData = filterCity(allData, params);
+    allSortTimeData = updateData(allSortTimeData, data).sort(compareDate);
+    const filteredData = filterCity(allSortTimeData, params);
     dataAcquisition(socket, timeFilterData(filteredData));
+    fullData = updateData(fullData, data);
   });
 
   socket.on(FILTER_DATA, (params) => {
-    const filteredData = filterCity(allData, params);
-    dataAcquisition(socket, timeFilterData(filteredData));
+    const filteredData = filterCity(allSortTimeData, params);
+    dataAcquisition(socket, filteredData);
   });
 
   socket.on(SORTING_DATA, (column, params) => {
-    const filteredData = filterCity(allData, params);
+    const filteredData = filterCity(allSortTimeData, params);
     const sortingData = sortingByColumns(column, filteredData);
-    dataAcquisition(socket, timeFilterData(sortingData));
+    dataAcquisition(socket, sortingData);
   });
 
   socket.on(DELETED_FLIGHT, (id) => {
-    allData = allData.filter((item) => item.id !== id);
-    dataAcquisition(socket, timeFilterData(allData));
+    allSortTimeData = allSortTimeData.filter((item) => item.id !== id);
+    dataAcquisition(socket, timeFilterData(allSortTimeData));
+    fullData = fullData.filter((item) => item.id !== id);
   });
 
   socket.on(CREATE_FLIGHT, (newFlight, params)=>{
-    const a = addNewFlight(allData, newFlight);
-    allData.push(a);
-    const filteredData = filterCity(allData, params);
+    const a = addNewFlight(allSortTimeData, newFlight);
+    allSortTimeData.push(a);
+    fullData.push(a);
+    const filteredData = filterCity(allSortTimeData, params);
     dataAcquisition(socket, timeFilterData(filteredData));
   })
 }
 
-function timeFilterData(allData) {
-  let data = allData;
+function timeFilterData(data) {
+  let allData = data;
   const date = new Date();
-  const newData = data.filter((item) => date.getTime() - item.allDataTime.expectedTime.getTime() < 12 * MINUTES);
-  return newData;
+  const filteredData = allData.filter((item) => date.getTime() - item.allDataTime.expectedTime.getTime() < 30 * MINUTES);
+  return filteredData;
 }
 
 module.exports = listenOfEvents;

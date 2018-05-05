@@ -16,9 +16,8 @@ class Table extends Component {
   componentDidUpdate() {
     window.onload = () => {
       pagination();
-
-    }
-    pagination();
+    };
+    pagination(this.props.numberRows);
   }
 
   render() {
@@ -51,9 +50,10 @@ class Table extends Component {
   }
 }
 
-export const TableFlight = connect(({allDataReducer, filterDataReducer}) =>
+export const TableFlight = connect(({allDataReducer, filterDataReducer, numbRowsReducer}) =>
   ({
     allData: allDataReducer.data,
-    filterData: filterDataReducer
+    filterData: filterDataReducer,
+    numberRows: numbRowsReducer
   })
 )(Table);

@@ -34,7 +34,7 @@
 .panel-control--button-create {
 	margin-left: 20px;
 	height: 26px;
-	width: 100px;
+	min-width: 100px;
 	background: rgba(70, 68, 68, 0.75);
 	color: #fff;
 }
