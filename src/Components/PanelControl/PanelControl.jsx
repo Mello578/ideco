@@ -65,8 +65,7 @@ class Panel extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    visible: state.barControlReducer.data,
-    numberRows: state.numbRowsReducer,
+    visible: state.barControlReducer.data
   }
 };
 
